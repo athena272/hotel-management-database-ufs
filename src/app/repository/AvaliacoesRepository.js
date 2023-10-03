@@ -12,8 +12,13 @@ class AvaliacaoRepository {
     return row
   }
 
-  async findByForeignKey(foreign_key) {
-    const [row] = await db.query('SELECT * FROM categorias WHERE id_categoria = $1', [foreign_key])
+  async findByForeignKeyCliente(foreign_key) {
+    const [row] = await db.query('SELECT * FROM clientes WHERE id_cliente = $1', [foreign_key])
+    return row
+  }
+
+  async findByForeignKeyHotel(foreign_key) {
+    const [row] = await db.query('SELECT * FROM hoteis WHERE id_hotel = $1', [foreign_key])
     return row
   }
 
