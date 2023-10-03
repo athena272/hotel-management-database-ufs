@@ -39,7 +39,7 @@ class ClienteRepository {
 
   async updateCliente(id, { endereco, telefone, id_usuario }) {
     const [row] = await db.query(`
-      UPDATE usuarios
+      UPDATE clientes
       SET endereco = $1, telefone = $2, id_usuario = $3
       WHERE id_cliente = $4
       RETURNING *
