@@ -37,7 +37,7 @@ docker container ls -a
 
 docker ps -a
 
-docker stop name or containerID
+docker stop name or containerID //docker stop pg
 
 docker start name or containerID
 
@@ -49,6 +49,8 @@ docker exec -it pg bash
 
 
 ===== POSTGRES =====
+
+docker exec -it pg bash
 
 psql -U root
 
