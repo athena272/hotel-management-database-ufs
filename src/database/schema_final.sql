@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS hotel_management.administradores (
 );
 
 -- Tabela de categorias
-CREATE TABLE IF NOT EXISTS hotel_management.categorias (
+CREATE TABLE IF NOT EXISTS hotel_management (
   id_categoria SERIAL PRIMARY KEY,
   nome VARCHAR(255) NOT NULL,
   descricao TEXT NOT NULL
