@@ -17,4 +17,4 @@ exports.query = async (query, values) => {
   return rows
 }
 
-// client.query('SELECT * FROM contacts').then(result => console.log(result))
+// client.query('SELECT * FROM hoteis').then(result => console.log(result))
