@@ -40,19 +40,19 @@ CREATE TABLE IF NOT EXISTS hotel_management.administradores (
 
 -- Tabela de categorias
 CREATE TABLE IF NOT EXISTS categorias (
-  id_categoria SERIAL PRIMARY KEY,
+  id_categoria UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   nome VARCHAR(255) NOT NULL,
   descricao TEXT NOT NULL
 );
 
 -- Tabela de hoteis
 CREATE TABLE IF NOT EXISTS hoteis (
-  id_hotel SERIAL PRIMARY KEY,
+  id_hotel UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   nome VARCHAR(255) NOT NULL UNIQUE,
   endereco VARCHAR(255) NOT NULL UNIQUE,
   numero_de_quartos INT NOT NULL,
-  id_categoria INT, -- Relacionamento com a tabela de categorias
-  FOREIGN KEY (id_categoria) REFERENCES (id_categoria) -- Chave estrangeira para a tabela de categorias
+  id_categoria UUID, -- Relacionamento com a tabela de categorias
+  FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria) -- Chave estrangeira para a tabela de categorias
 );
 
 -- Tabela de aeroportos
