@@ -5,20 +5,20 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- Criando as tabelas
 
 -- Tabela de usuários
-CREATE TABLE IF NOT EXISTS hotel_management.usuarios (
-  id_usuario SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS usuarios (
+  id_usuario UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   nome VARCHAR(255) NOT NULL,
   email VARCHAR UNIQUE,
   senha VARCHAR(255) NOT NULL
 );
 
 -- Tabela de clientes
-CREATE TABLE IF NOT EXISTS hotel_management.clientes (
-  id_cliente SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS clientes (
+  id_cliente UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   endereco VARCHAR(255) NOT NULL,
   telefone VARCHAR(15) NOT NULL,
-  id_usuario INT, -- Relacionamento com a tabela de usuários
-  FOREIGN KEY (id_usuario) REFERENCES hotel_management.usuarios(id_usuario) -- Chave estrangeira para a tabela de usuários
+  id_usuario UUID, -- Relacionamento com a tabela de usuários
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) -- Chave estrangeira para a tabela de usuários
 );
 
 -- Tabela de hoteleiros
