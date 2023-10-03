@@ -86,15 +86,15 @@ CREATE TABLE IF NOT EXISTS hotel_management.reservas (
 );
 
 -- Tabela de avaliações
-CREATE TABLE IF NOT EXISTS hotel_management.avaliacoes (
-  id_avaliacao SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS avaliacoes (
+  id_avaliacao UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   comentario TEXT NOT NULL,
   classificacao INT NOT NULL,
   data_avaliacao DATE NOT NULL,
-  id_cliente INT, -- Relacionamento com a tabela de clientes
-  id_hotel INT, -- Relacionamento com a tabela de hoteis
-  FOREIGN KEY (id_cliente) REFERENCES hotel_management.clientes(id_cliente), -- Chave estrangeira para a tabela de clientes
-  FOREIGN KEY (id_hotel) REFERENCES hotel_management.hoteis(id_hotel) -- Chave estrangeira para a tabela de hoteis
+  id_cliente UUID, -- Relacionamento com a tabela de clientes
+  id_hotel UUID, -- Relacionamento com a tabela de hoteis
+  FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente), -- Chave estrangeira para a tabela de clientes
+  FOREIGN KEY (id_hotel) REFERENCES hoteis(id_hotel) -- Chave estrangeira para a tabela de hoteis
 );
 
 -- Tabela de pagamentos
