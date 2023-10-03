@@ -10,7 +10,7 @@ class UsersController {
   }
 
   async show(req, res) {
-    // Get one registered categoria
+    // Get one registered user
     const { id } = req.params
     const user = await UsersRepository.findById(id)
 
@@ -45,7 +45,7 @@ class UsersController {
   }
 
   async update(req, res) {
-    // Update the categoria
+    // Update the user
     const { id } = req.params
     const { nome, email, senha } = req.body
 
