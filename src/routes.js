@@ -4,6 +4,7 @@ const UsersController = require('./app/controllers/UsersController')
 const ClientesController = require('./app/controllers/ClientesController')
 const HoteisController = require('./app/controllers/HoteisController')
 const AvaliacoesController = require('./app/controllers/AvaliacoesController')
+const ReservasController = require('./app/controllers/ReservasController')
 // const { index } = require('./app/controllers/ContactController')
 
 // const route = express.Router()
@@ -44,5 +45,12 @@ router.get('/avaliacoes/:id', AvaliacoesController.show)
 router.delete('/avaliacoes/:id', AvaliacoesController.delete)
 router.post('/avaliacoes', AvaliacoesController.store)
 router.put('/avaliacoes/:id', AvaliacoesController.update)
+
+//Reservas
+router.get('/reservas', ReservasController.index)
+router.get('/reservas/:id', ReservasController.show)
+router.delete('/reservas/:id', ReservasController.delete)
+router.post('/reservas', ReservasController.store)
+router.put('/reservas/:id', ReservasController.update)
 
 module.exports = router
