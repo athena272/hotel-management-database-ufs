@@ -52,14 +52,14 @@ class ReservaController {
   async update(req, res) {
     // Update the avaliacao
     const { id } = req.params
-    const { comentario, classificacao, data_avaliacao, id_usuario, id_hotel } = req.body
+    const { data_inicio, data_fim, preco, id_usuario, id_hotel } = req.body
 
     const reservaExists = await ReservasRepository.findById(id)
     if (!reservaExists) {
       return res.status(404).json({ errorMessage: 'Reserva not found' })
     }
 
-    if (!comentario || !classificacao || !data_avaliacao || !id_usuario || !id_hotel) {
+    if (!data_inicio || !data_fim || !preco || !id_usuario || !id_hotel) {
       return res.status(400).json({ errorMessage: 'Field is required' })
     }
 
