@@ -71,7 +71,7 @@ class CategoriasController {
 
     await CategoriasRepository.delete(id)
     // Sucessfully without body
-    return res.status(204).json({ deleteMessage: 'Categoria was deleted' })
+    res.sendStatus(204)
   }
 }
 
