@@ -39,7 +39,7 @@ class HotelRepository {
 
   async updateHotel(id, { nome, endereco, numero_de_quartos, id_categoria }) {
     const [row] = await db.query(`
-      UPDATE usuarios
+      UPDATE hoteis
       SET nome = $1, endereco = $2, numero_de_quartos = $3, id_categoria = $4
       WHERE id_hotel = $5
       RETURNING *
