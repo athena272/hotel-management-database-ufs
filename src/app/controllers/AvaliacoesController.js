@@ -31,14 +31,14 @@ class AvaliacaoController {
       return res.status(400).json({ errorMessage: 'Field is required' })
     }
 
-    const foreignKeyExists_1 = await AvaliacoesRepository.findByForeignKey(id_cliente)
-    const foreignKeyExists_2 = await AvaliacoesRepository.findByForeignKey(id_hotel)
+    const foreignKeyExistsCliente = await AvaliacoesRepository.findByForeignKeyCliente(id_cliente)
+    const foreignKeyExistsHotel = await AvaliacoesRepository.findByForeignKeyHotel(id_hotel)
 
-    if (!foreignKeyExists_1) {
+    if (!foreignKeyExistsCliente) {
       return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_cliente was NOT FOUND' })
     }
 
-    if (!foreignKeyExists_2) {
+    if (!foreignKeyExistsHotel) {
       return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_hotel was NOT FOUND' })
     }
 
@@ -63,14 +63,14 @@ class AvaliacaoController {
       return res.status(400).json({ errorMessage: 'Field is required' })
     }
 
-    const foreignKeyExists_1 = await AvaliacoesRepository.findByForeignKey(id_cliente)
-    const foreignKeyExists_2 = await AvaliacoesRepository.findByForeignKey(id_hotel)
+    const foreignKeyExistsCliente = await AvaliacoesRepository.findByForeignKeyCliente(id_cliente)
+    const foreignKeyExistsHotel = await AvaliacoesRepository.findByForeignKeyHotel(id_hotel)
 
-    if (!foreignKeyExists_1) {
+    if (!foreignKeyExistsCliente) {
       return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_cliente was NOT FOUND' })
     }
 
-    if (!foreignKeyExists_2) {
+    if (!foreignKeyExistsHotel) {
       return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_hotel was NOT FOUND' })
     }
 
