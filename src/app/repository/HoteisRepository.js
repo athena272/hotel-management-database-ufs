@@ -27,23 +27,23 @@ class HotelRepository {
     return deleteOperation
   }
 
-  async create({ nome, endereco, numero_de_quarto, id_categoria }) {
+  async create({ nome, endereco, numero_de_quartos, id_categoria }) {
     const [row] = await db.query(`
-      INSERT INTO hoteis(nome, endereco, numero_de_quarto, id_categoria)
-      VALUES($1, $2, $3)
+      INSERT INTO hoteis(nome, endereco, numero_de_quartos, id_categoria)
+      VALUES($1, $2, $3, $4)
       RETURNING *
-    `, [nome, endereco, numero_de_quarto, id_categoria])
+    `, [nome, endereco, numero_de_quartos, id_categoria])
 
     return row
   }
 
-  async updateHotel(id, { nome, endereco, numero_de_quarto, id_categoria }) {
+  async updateHotel(id, { nome, endereco, numero_de_quartos, id_categoria }) {
     const [row] = await db.query(`
       UPDATE usuarios
-      SET nome = $1, endereco = $2, numero_de_quarto = $3, id_categoria = $4
+      SET nome = $1, endereco = $2, numero_de_quartos = $3, id_categoria = $4
       WHERE id_hotel = $5
       RETURNING *
-    `, [nome, endereco, numero_de_quarto, id_categoria, id])
+    `, [nome, endereco, numero_de_quartos, id_categoria, id])
     return row
   }
 }
