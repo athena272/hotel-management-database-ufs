@@ -40,7 +40,7 @@ class ClienteController {
     const foreignKeyExists = await ClientesRepository.findByForeignKey(id_usuario)
 
     if (!foreignKeyExists) {
-      return res.status(400).json({ errorMessage: 'This FOREIGN KEY was NOT FOUND' })
+      return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_usuario was NOT FOUND' })
     }
 
     const cliente = await ClientesRepository.create({
@@ -67,7 +67,7 @@ class ClienteController {
     const foreignKeyExists = await ClientesRepository.findByForeignKey(id_usuario)
 
     if (!foreignKeyExists) {
-      return res.status(400).json({ errorMessage: 'This FOREIGN KEY was NOT FOUND' })
+      return res.status(400).json({ errorMessage: 'This FOREIGN KEY id_usuario was NOT FOUND' })
     }
 
     const cliente = await ClientesRepository.updateCliente(id, {
