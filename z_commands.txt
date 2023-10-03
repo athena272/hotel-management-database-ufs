@@ -1,0 +1,59 @@
+yarn add express
+
+yarn add nodemon -D
+
+1) forma
+./node_modules/.bin/nodemon src/index.js
+
+2) forma
+npx nodemon sr/index.js
+
+NPM SCRIPTS
+npm run dev
+
+yarn add eslint -D
+
+yarn eslint --init
+
+para o yarn reconhecer, lancar:
+yarn
+
+yarn add uuidv4
+
+yarn remove uuidv4
+
+yarn add uuid
+
+yarn add pg
+
+===== DOCKER =====
+docker pull postgres
+
+docker image ls
+
+docker run --name pg -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -p 5432:5432 -d postgres
+
+docker container ls -a
+
+docker ps -a
+
+docker stop name or containerID
+
+docker start name or containerID
+
+docker rmi REPOSITORY or IMAGE ID to delete
+
+docker container rm NAME
+
+docker exec -it pg bash
+
+
+===== POSTGRES =====
+
+psql -U root
+
+\l
+
+\c mycontacts
+
+\dt
