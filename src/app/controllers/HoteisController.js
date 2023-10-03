@@ -25,16 +25,16 @@ class HotelController {
 
   async store(req, res) {
     // Create a new cliente
-    const { nome, endereco, numero_de_quarto, id_categoria } = req.body
+    const { nome, endereco, numero_de_quartos, id_categoria } = req.body
 
-    if (!nome || !endereco || !numero_de_quarto || !id_categoria) {
+    if (!nome || !endereco || !numero_de_quartos || !id_categoria) {
       return res.status(400).json({ errorMessage: 'Field is required' })
     }
 
     const enderecoExists = await HoteisRepository.findByEnderco(endereco)
 
     if (enderecoExists) {
-      return res.status(400).json({ errorMessage: 'This telefone is already in use' })
+      return res.status(400).json({ errorMessage: 'This endereco is already in use' })
     }
 
     const foreignKeyExists = await HoteisRepository.findByForeignKey(id_categoria)
@@ -44,7 +44,7 @@ class HotelController {
     }
 
     const hotel = await HoteisRepository.create({
-      nome, endereco, numero_de_quarto, id_categoria
+      nome, endereco, numero_de_quartos, id_categoria
     })
 
     res.json(hotel)
@@ -53,14 +53,14 @@ class HotelController {
   async update(req, res) {
     // Update the hotel
     const { id } = req.params
-    const { nome, endereco, numero_de_quarto, id_categoria } = req.body
+    const { nome, endereco, numero_de_quartos, id_categoria } = req.body
 
     const hotelExists = await HoteisRepository.findById(id)
     if (!hotelExists) {
       return res.status(404).json({ errorMessage: 'Hotel not found' })
     }
 
-    if (!nome || !endereco || !numero_de_quarto || !id_categoria) {
+    if (!nome || !endereco || !numero_de_quartos || !id_categoria) {
       return res.status(400).json({ errorMessage: 'Field is required' })
     }
 
@@ -71,7 +71,7 @@ class HotelController {
     }
 
     const hotel = await HoteisRepository.updateHotel(id, {
-      nome, endereco, numero_de_quarto, id_categoria
+      nome, endereco, numero_de_quartos, id_categoria
     })
 
     res.json(hotel)
