@@ -3,6 +3,7 @@ const CategoriasController = require('./app/controllers/CategoriasController')
 const UsersController = require('./app/controllers/UsersController')
 const ClientesController = require('./app/controllers/ClientesController')
 const HoteisController = require('./app/controllers/HoteisController')
+const AvaliacoesController = require('./app/controllers/AvaliacoesController')
 // const { index } = require('./app/controllers/ContactController')
 
 // const route = express.Router()
@@ -36,5 +37,12 @@ router.get('/hoteis/:id', HoteisController.show)
 router.delete('/hoteis/:id', HoteisController.delete)
 router.post('/hoteis', HoteisController.store)
 router.put('/hoteis/:id', HoteisController.update)
+
+//Avaliações
+router.get('/avaliacoes', AvaliacoesController.index)
+router.get('/avaliacoes/:id', AvaliacoesController.show)
+router.delete('/avaliacoes/:id', AvaliacoesController.delete)
+router.post('/avaliacoes', AvaliacoesController.store)
+router.put('/avaliacoes/:id', AvaliacoesController.update)
 
 module.exports = router
