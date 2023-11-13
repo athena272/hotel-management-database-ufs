@@ -1,4 +1,5 @@
 const AvaliacoesRepository = require('../repository/AvaliacoesRepository')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class AvaliacaoController {
   async index(req, res) {
@@ -27,8 +28,10 @@ class AvaliacaoController {
     // Create a new cliente
     const { comentario, classificacao, data_avaliacao, id_cliente, id_hotel } = req.body
 
+    const missingFields = [[comentario, 'comentario'], [classificacao, 'classificacao'], [data_avaliacao, 'data_avaliacao'], [id_cliente, 'id_cliente'], [id_hotel, 'id_hotel']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!comentario || !classificacao || !data_avaliacao || !id_cliente || !id_hotel) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExistsCliente = await AvaliacoesRepository.findByForeignKeyCliente(id_cliente)
@@ -59,8 +62,11 @@ class AvaliacaoController {
       return res.status(404).json({ errorMessage: 'Avaliacao not found' })
     }
 
+    const missingFields = [[comentario, 'comentario'], [classificacao, 'classificacao'], [data_avaliacao, 'data_avaliacao'], [id_cliente, 'id_cliente'], [id_hotel, 'id_hotel']].filter(isEmptyField).map(([field, key]) => key)
+    console.log(req.body)
+
     if (!comentario || !classificacao || !data_avaliacao || !id_cliente || !id_hotel) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExistsCliente = await AvaliacoesRepository.findByForeignKeyCliente(id_cliente)
