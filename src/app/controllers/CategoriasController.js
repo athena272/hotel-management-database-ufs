@@ -1,4 +1,5 @@
 const CategoriasRepository = require('../repository/CategoriasRepository')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class CategoriasController {
   async index(req, res) {
@@ -27,8 +28,10 @@ class CategoriasController {
     // Create a new categoria
     const { nome, descricao } = req.body
 
+    const missingFields = [[nome, 'nome'], [descricao, 'descricao']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!nome || !descricao) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const nomeExists = await CategoriasRepository.findByName(nome)
@@ -54,8 +57,10 @@ class CategoriasController {
       return res.status(404).json({ errorMessage: 'categoria not found' })
     }
 
+    const missingFields = [[nome, 'nome'], [descricao, 'descricao']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!nome || !descricao) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const categoria = await CategoriasRepository.updateCategoria(id, {
