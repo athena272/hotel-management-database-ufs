@@ -1,4 +1,5 @@
 const ReservasRepository = require('../repository/ReservasRepository')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class ReservaController {
   async index(req, res) {
@@ -26,9 +27,10 @@ class ReservaController {
   async store(req, res) {
     // Create a new reserva
     const { data_inicio, data_fim, preco, id_usuario, id_hotel } = req.body
+    const missingFields = [[data_inicio, 'data-inicio'], [data_fim, 'data-fim'], [preco, 'preco'], [id_usuario, 'id-hotel'], [id_hotel, 'id-hotel']].filter(isEmptyField).map(([field, key]) => key)
 
     if (!data_inicio || !data_fim || !preco || !id_usuario || !id_hotel) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExistsUsuario = await ReservasRepository.findByForeignKeyUsuario(id_usuario)
@@ -59,8 +61,10 @@ class ReservaController {
       return res.status(404).json({ errorMessage: 'Reserva not found' })
     }
 
+    const missingFields = [[data_inicio, 'data-inicio'], [data_fim, 'data-fim'], [preco, 'preco'], [id_usuario, 'id-hotel'], [id_hotel, 'id-hotel']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!data_inicio || !data_fim || !preco || !id_usuario || !id_hotel) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExistsUsuario = await ReservasRepository.findByForeignKeyUsuario(id_usuario)
