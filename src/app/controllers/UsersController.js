@@ -1,4 +1,5 @@
 const UsersRepository = require('../repository/UsersRepository')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class UsersController {
   async index(req, res) {
@@ -27,8 +28,10 @@ class UsersController {
     // Create a new user
     const { nome, email, senha } = req.body
 
+    const missingFields = [[nome, 'nome'], [email, 'email'], [senha, 'senha']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!nome || !email || !senha) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const emailExists = await UsersRepository.findByEmail(email)
