@@ -1,4 +1,5 @@
 const ClientesRepository = require('../repository/ClientesRepository ')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class ClienteController {
   async index(req, res) {
@@ -27,8 +28,10 @@ class ClienteController {
     // Create a new cliente
     const { endereco, telefone, id_usuario } = req.body
 
+    const missingFields = [[endereco, 'endereco'], [telefone, 'telefone'], [id_usuario, 'id_usuario']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!endereco || !telefone || !id_usuario) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const telefoneExists = await ClientesRepository.findByTelefone(telefone)
@@ -60,8 +63,10 @@ class ClienteController {
       return res.status(404).json({ errorMessage: 'Cliente not found' })
     }
 
+    const missingFields = [[endereco, 'endereco'], [telefone, 'telefone'], [id_usuario, 'id_usuario']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!endereco || !telefone || !id_usuario) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExists = await ClientesRepository.findByForeignKey(id_usuario)
