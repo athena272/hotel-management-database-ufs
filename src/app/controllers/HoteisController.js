@@ -1,4 +1,5 @@
 const HoteisRepository = require('../repository/HoteisRepository')
+const isEmptyField = require('./CheckEmptyFiedController')
 
 class HotelController {
   async index(req, res) {
@@ -27,8 +28,10 @@ class HotelController {
     // Create a new cliente
     const { nome, endereco, numero_de_quartos, id_categoria } = req.body
 
+    const missingFields = [[nome, 'nome'], [endereco, 'endereco'], [numero_de_quartos, 'numero_de_quartos'], [id_categoria, 'id_categoria']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!nome || !endereco || !numero_de_quartos || !id_categoria) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const enderecoExists = await HoteisRepository.findByEnderco(endereco)
@@ -60,8 +63,10 @@ class HotelController {
       return res.status(404).json({ errorMessage: 'Hotel not found' })
     }
 
+    const missingFields = [[nome, 'nome'], [endereco, 'endereco'], [numero_de_quartos, 'numero_de_quartos'], [id_categoria, 'id_categoria']].filter(isEmptyField).map(([field, key]) => key)
+
     if (!nome || !endereco || !numero_de_quartos || !id_categoria) {
-      return res.status(400).json({ errorMessage: 'Field is required' })
+      return res.status(400).json({ errorMessage: `Missing field(s): ${missingFields.join(', ')}` })
     }
 
     const foreignKeyExists = await HoteisRepository.findByForeignKey(id_categoria)
